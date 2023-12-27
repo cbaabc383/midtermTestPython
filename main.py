@@ -1,5 +1,22 @@
 import json
 
+def new_json():
+    
+    new = {
+    "notes": [
+        {
+            "title": "",
+            "body": "",
+            "datetime": "",
+            "id": 0
+        }
+    ]
+    }
+    
+    with open("notes.json", "w") as json_file:
+        json.dump(new, json_file)
+
+
 def save_notes(notes, file_path):
 
     with open(file_path, 'w') as file:
@@ -46,15 +63,27 @@ def delete_note(notes, note_id):
     
 def main():
 
-    import json
+    #import json
 
     import datetime
 
-    file_path = 'notes.json'  # Путь к файлу заметок
-    notes = load_notes(file_path)  # Загружаем заметки из файла
+    
+    file_path = 'notes.json'
+
+    try:
+        file = open(file_path)
+    except IOError as e:
+        new_json()
+    #else:
+        #with file:
+    notes = load_notes(file_path) 
+
+
+    
 
     while True:
 
+        print()
         print('1. Вывести все заметки')
         print('2. Добавить заметку')
         print('3. Редактировать заметку')
