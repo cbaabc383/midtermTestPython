@@ -1,15 +1,14 @@
 import json
 
-
-
 def save_notes(notes, file_path):
 
     with open(file_path, 'w') as file:
 
         json.dump(notes, file, indent=4)
+
+
+
 import json
-
-
 
 def load_notes(file_path):
 
@@ -17,7 +16,9 @@ def load_notes(file_path):
 
         notes = json.load(file)
 
-        return notes
+    return notes
+    
+
 def add_note(notes, new_note):
 
     # Получаем максимальный идентификатор из существующих заметок
@@ -27,6 +28,8 @@ def add_note(notes, new_note):
     new_note['id'] = max_id + 1
 
     notes.append(new_note)
+
+
 def edit_note(notes, note_id, new_title=None, new_body=None, new_datetime=None):
 
     for note in notes:
@@ -45,9 +48,16 @@ def edit_note(notes, note_id, new_title=None, new_body=None, new_datetime=None):
 
                 note['datetime'] = new_datetime
 
-            breakdef delete_note(notes, note_id):
+            break
+    
+def delete_note(notes, note_id):
 
-    notes[:] = [note for note in notes if note['id'] != note_id]def main():
+    notes[:] = [note for note in notes if note['id'] != note_id]
+
+    
+def main():
+
+    import json
 
     file_path = 'notes.json'  # Путь к файлу заметок
 
