@@ -38,7 +38,7 @@ def edit_note(notes, note_id, new_title=None, new_body=None, new_datetime=None):
 
             break
     
-    
+
 def delete_note(notes, note_id):
 
     notes['notes'][:] = [note for note in notes['notes'] if note['id'] != note_id]
@@ -47,6 +47,9 @@ def delete_note(notes, note_id):
 def main():
 
     import json
+
+    import datetime
+
     file_path = 'notes.json'  # Путь к файлу заметок
     notes = load_notes(file_path)  # Загружаем заметки из файла
 
@@ -57,6 +60,7 @@ def main():
         print('3. Редактировать заметку')
         print('4. Удалить заметку')
         print('5. Выйти')
+        print()
 
         choice = input('Выберите действие: ')
 
@@ -76,9 +80,10 @@ def main():
 
         elif choice == '2':
 
+            print()
             title = input('Введите заголовок заметки: ')
             body = input('Введите текст заметки: ')
-            datetime = input('Введите дату/время заметки (в формате "гггг-мм-дд чч:мм:сс"): ')
+            datetime = str(datetime.datetime.now())
 
             new_note = {
                 'title': title,
@@ -101,6 +106,7 @@ def main():
 
         elif choice == '4':
 
+            print()
             note_id = int(input('Введите ID заметки для удаления: '))
             delete_note(notes, note_id)
             save_notes(notes, file_path)
