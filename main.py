@@ -1,20 +1,39 @@
 import json
 
-def new_json():
-    
-    new = {
+def abc(id):
+
+    import datetime
+
+    print()
+    title = input('Введите заголовок заметки: ')
+    body = input('Введите текст заметки: ')
+    datetime = str(datetime.datetime.now())
+
+
+    new_note = {
     "notes": [
         {
-            "title": "",
-            "body": "",
-            "datetime": "",
-            "id": 0
+            "id": id,
+            "title": title,
+            "body": body,
+            "datetime": datetime
+
         }
     ]
     }
+    return new_note
+
+def new_json():
+
+    import datetime
+    
+    id = 1001
+    print("Список заметок пуст. Добавьте новую:")
+
+    new_note = abc(id)
     
     with open("notes.json", "w") as json_file:
-        json.dump(new, json_file)
+        json.dump(new_note, json_file)
 
 
 def save_notes(notes, file_path):
@@ -125,10 +144,12 @@ def main():
 
         elif choice == '3':
 
+            import datetime
+
             note_id = int(input('Введите ID заметки для редактирования: '))
             new_title = input('Введите новый заголовок заметки (или оставьте пустым): ')
             new_body = input('Введите новый текст заметки (или оставьте пустым): ')
-            new_datetime = input('Введите новую дату/время заметки (или оставьте пустым): ')
+            new_datetime = str(datetime.datetime.now())
 
             edit_note(notes, note_id, new_title, new_body, new_datetime)
             save_notes(notes, file_path)
